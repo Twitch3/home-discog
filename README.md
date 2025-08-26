@@ -57,3 +57,15 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## TO DO List
+Home: Not sure yet what to put here- probably some kind of summary.
+Settings: Probably settings with default displays and sorting.
+Library:
+- Discs View: Simple view to see discs
+- Disc Details View: View details for a particular album
+- Search Bar: Display at top, allow searching of discs view
+- Advanced Search: Not sure whether this will be part of search bar component, but we'll eventually want to enable searching more granular fields.
+- Add Disc: Flow to add an album to the library
+Database: Setup DB and interactions from app
+Discogs API: Integrate disc add with Discogs to fetch more detailed data.
