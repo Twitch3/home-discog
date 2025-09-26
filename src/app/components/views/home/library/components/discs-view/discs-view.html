@@ -1,1 +1,27 @@
-<p>discs-view works!</p>
+<div class="discs-view">
+  {{testAPI}}
+  <div class="options-bar">
+    <select name="sort-option" id="sort-option">
+      <option value="artist">Artist</option>
+      <option value="album-title">Title</option>
+      <option value="genre">Genre</option>
+      <option value="year">Year</option>
+    </select>
+    <button>Sort Order (asc)</button>
+    <button (click)="addAlbum()">Add album</button>
+  </div>
+  <div class="album-list-container">
+    <div class="album-list">
+      @for (album of discs; track album.id) {
+      <div class="album-preview" routerLink="/disc-details" [queryParams]="{ id: album.id }">
+        <img src="https://placehold.co/200x200" alt="album-art" />
+        <p class="album-title">{{ album.title }}</p>
+        <p class="album-art">{{ album['artist-credit'] }}</p>
+      </div>
+      } @empty {
+      <div>There are no items.</div>
+      }
+    </div>
+  </div>
+  <app-add-album-modal></app-add-album-modal>
+</div>

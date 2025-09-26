@@ -1,0 +1,19 @@
+.add-album-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgba(0,0,0,0.90);
+
+  .album-search-results {
+    max-height: 70vh;
+    overflow: auto;
+  }
+}

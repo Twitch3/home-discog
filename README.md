@@ -59,9 +59,9 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
 
 ## TO DO List
-Home: Not sure yet what to put here- probably some kind of summary.
+Home: Not sure yet what to put here- probably some kind of summary of the library.
 Settings: Probably settings with default displays and sorting.
-Library:
+Library: Select from type of media (Vinyl, CD, etc)
 - Discs View: Simple view to see discs
 - Disc Details View: View details for a particular album
 - Search Bar: Display at top, allow searching of discs view

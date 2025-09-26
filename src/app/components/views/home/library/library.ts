@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-library',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './library.html',
   styleUrl: './library.scss'
 })
