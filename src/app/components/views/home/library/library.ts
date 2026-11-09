@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { DiscType } from '../../../../shared/types/disc-type';
 
 @Component({
   selector: 'app-library',
@@ -8,5 +9,5 @@ import { RouterLink } from '@angular/router';
   styleUrl: './library.scss'
 })
 export class Library {
-
+  public types = DiscType;
 }

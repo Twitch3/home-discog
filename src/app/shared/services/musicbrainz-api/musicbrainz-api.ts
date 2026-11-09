@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CoverArtArchiveApi, IReleaseList, MusicBrainzApi } from 'musicbrainz-api';
-import { Observable} from 'rxjs';
+import { Observable } from 'rxjs';
+import { ReleaseCoverArt } from '../../interfaces/CoverArt';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class MusicbrainzApi {
     return this.api.search('release', { query: query });
   }
 
-  public getReleaseCoverArt(releaseId: string): Observable<object> {
-    return this.http.get('https://coverartarchive.org/release/' + releaseId);
+  public getReleaseCoverArt(releaseId: string): Observable<ReleaseCoverArt> {
+    return this.http.get('https://coverartarchive.org/release/' + releaseId) as Observable<ReleaseCoverArt>;
   }
 }

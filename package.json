@@ -1,10 +1,11 @@
 {
   "name": "home-discog",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve & npm run start-server",
-    "start-server": "nodemon --watch db-server/**/*.ts --exec ts-node db-server/main.ts",
+    "start": "concurrently \"npm run ng serve\" \"npm run start-server\"",
+    "start-server": "nodemon --verbose --watch db-server/**/*.ts --exec ts-node db-server/main.ts",
     "build": "ng build & tsc ./db-server/main.ts --outDir ./dist/db-server/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -31,20 +32,22 @@
     "@angular/material": "^20.2.4",
     "@angular/platform-browser": "^20.2.0",
     "@angular/router": "^20.2.0",
+    "body-parser": "^2.2.1",
     "express": "^5.1.0",
-    "lowdb": "^7.0.1",
     "musicbrainz-api": "^0.25.1",
     "rxjs": "~7.8.0",
+    "sqlite3": "^6.0.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
     "@angular/build": "^20.2.0",
-    "@angular/cli": "^20.2.0",
+    "@angular/cli": "^17.3.17",
     "@angular/compiler-cli": "^20.2.0",
     "@types/express": "^5.0.3",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^24.3.0",
+    "concurrently": "^9.2.1",
     "jasmine-core": "~5.9.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

@@ -1,4 +1,10 @@
-<button routerLink="/discs">Vinyl</button>
-<button routerLink="/discs">CD</button>
-<button routerLink="/discs">Blu-Ray</button>
-<button routerLink="/discs">DvD</button>
+<div class="library-container">
+  <div class="category-col">
+    <button routerLink="/discs" [queryParams]="{ type: types.vinyl }">Vinyl</button>
+    <button routerLink="/discs" [queryParams]="{ type: types.cd }">CD</button>
+  </div>
+  <div class="category-col">
+    <button routerLink="/discs" [queryParams]="{ type: types.blu_ray }">Blu-Ray</button>
+    <button routerLink="/discs" [queryParams]="{ type: types.dvd }">DvD</button>
+  </div>
+</div>

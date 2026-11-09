@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, model } from '@angular/core';
 import { MusicbrainzApi } from '../../../services/musicbrainz-api/musicbrainz-api';
 import { IArtistCredit, IReleaseList } from 'musicbrainz-api';
 import { FormsModule } from '@angular/forms';
@@ -8,25 +8,29 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { take } from 'rxjs';
 import { Album } from '../../../interfaces/Album';
+import { CountryNamePipe } from '../../../pipes/country-name.pipe';
 
 @Component({
   selector: 'app-add-album-modal',
-  imports: [FormsModule, CommonModule, MatTableModule, MatInputModule, MatPaginatorModule],
+  imports: [FormsModule, CommonModule, MatTableModule, MatInputModule, MatPaginatorModule, CountryNamePipe],
   templateUrl: './add-album-modal.html',
   styleUrl: './add-album-modal.scss'
 })
 export class AddAlbumModal {
-  @Input() active = false;
-  @Output() addedAlbum = new EventEmitter();
+  public active = model<boolean>(false);
+  @Output() albumAdded = new EventEmitter();
 
   public query: string = '';
-  public selectedAlbum: any;
+  public selectedAlbum: Album | undefined;
   public searchResults: MatTableDataSource<Album> = new MatTableDataSource();
   public displayedColumns: string[] = ['cover', 'title', 'artist', 'country', 'tracks', 'release_date', 'status'];
   public errorMsg: string | undefined;
 
   constructor(public mbAPI: MusicbrainzApi) { }
 
+  /**
+   * Function that searches the mbAPI based on the current value of this.query
+   */
   public search() {
     this.mbAPI.searchMusicBrainzForAlbum(this.query).then(
       (results: IReleaseList) => {
@@ -40,14 +44,46 @@ export class AddAlbumModal {
     )
   }
 
-  public add(album: Album) {
-    this.addedAlbum.emit(album)
+  /**
+   * Emits an addAlbum event when button is selected
+   */
+  public add() {
+    if (this.selectedAlbum) {
+      this.albumAdded.emit(this.selectedAlbum)
+      this.cancel();
+    }
   }
 
+  /**
+   * Closes modal and clears any current data
+   */
   public cancel() {
-    this.active = false;
+    if (this.selectedAlbum) {
+      this.selectedAlbum.selected = false;
+      this.selectedAlbum = undefined;
+    }
+
+    this.searchResults = new MatTableDataSource();
+    this.query = '';
+    this.active.update(() => false)
   }
 
+  public select(album: Album) {
+    if (album.selected) {
+      album.selected = false;
+      this.selectedAlbum = undefined;
+    } else {
+      if (this.selectedAlbum) {
+        this.selectedAlbum.selected = false;
+      }
+      album.selected = true;
+      this.selectedAlbum = album;
+    }
+  }
+
+  /**
+   * Gets readable string for available artists in an array.
+   */
   getArtistsString(artists: IArtistCredit[] | undefined): string {
     let artistsSTring: string = '';
     artists?.forEach((artist: IArtistCredit) => {
@@ -59,10 +95,17 @@ export class AddAlbumModal {
     return artistsSTring;
   }
 
+  /**
+   * Grabs cover art from the mbAPI for each album in a search result
+   * @param searchResults
+   */
   fetchSearchResultCovers(searchResults: Album[]) {
     searchResults.forEach((releaseMatch: Album) => {
       this.mbAPI.getReleaseCoverArt(releaseMatch.id).pipe(take(1)).subscribe((data: any) => {
         releaseMatch.images = data.images;
+        if (data.images?.length > 0) {
+          releaseMatch.image = data.images[0];
+        }
       });
     });
   }

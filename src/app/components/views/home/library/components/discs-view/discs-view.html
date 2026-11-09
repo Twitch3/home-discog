@@ -1,5 +1,4 @@
 <div class="discs-view">
-  {{testAPI}}
   <div class="options-bar">
     <select name="sort-option" id="sort-option">
       <option value="artist">Artist</option>
@@ -19,9 +18,9 @@
         <p class="album-art">{{ album['artist-credit'] }}</p>
       </div>
       } @empty {
-      <div>There are no items.</div>
+      <div class="empty-lib">It feels empty here- let's <button (click)="addAlbum()">add some albums!</button></div>
       }
     </div>
   </div>
-  <app-add-album-modal></app-add-album-modal>
+  <app-add-album-modal [(active)]="showAddModal" (albumAdded)="albumAdded($event)"></app-add-album-modal>
 </div>

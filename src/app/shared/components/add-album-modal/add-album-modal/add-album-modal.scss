@@ -4,16 +4,77 @@
   left: 0;
   height: 100vh;
   width: 100vw;
+  margin: 0;
+  padding: 50px;
+  box-sizing: border-box;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  background-color: rgba(0,0,0,0.90);
+  background-color: rgba(0, 0, 0, 0.9);
+
+  button {
+    height: 60px;
+  }
+
+  .album-search {
+    display: flex;
+    width: 100%;
+    justify-content: end;
+    #search-text {
+      width: 250px;
+    }
+  }
 
   .album-search-results {
-    max-height: 70vh;
+    width: 100%;
+    border-radius: 10px;
     overflow: auto;
+    .search-results-table {
+      tr {
+        box-sizing: border-box;
+        &.selected {
+          background-color: grey;
+        }
+      }
+      td {
+        box-sizing: border-box;
+        padding-top: 5px;
+        img {
+          height: 100px;
+          width: 100px;
+
+          &.missing-art {
+            animation-name: spin;
+            animation-duration: 40000ms;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+          }
+        }
+      }
+    }
+    tr.no-data {
+      color: #000;
+      width: 100%;
+      td {
+        height: 100px;
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+  .modal-controls {
+    padding-top: 20px;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 }

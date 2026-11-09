@@ -1,7 +1,37 @@
-<div class="app-wrapper">
-  <header>Header</header>
-  <div class="router-wrapper">
-    <router-outlet></router-outlet>
+<mat-drawer-container>
+  <div class="app-wrapper">
+    <header>
+      <mat-icon
+        aria-hidden="false"
+        aria-label="side nav"
+        fontIcon="menu"
+        (click)="drawer.toggle()"
+      ></mat-icon>
+      Header
+    </header>
+    <div class="router-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+    <footer>Footer</footer>
   </div>
-  <footer>Footer</footer>
-</div>
+  <mat-drawer #drawer class="sidenav" mode="over">
+    <div class="nav-header">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="side nav"
+        fontIcon="close"
+        (click)="drawer.toggle()"
+      ></mat-icon>
+    </div>
+    <div class="nav-content" (click)="drawer.toggle()">
+      <div class="nav-parent">
+        <a routerLink="/library">Library</a>
+        <a class="nav-child" routerLink="/discs" [queryParams]="{ type: types.vinyl }">Vinyl</a>
+        <a class="nav-child" routerLink="/discs" [queryParams]="{ type: types.cd }">CD</a>
+        <a class="nav-child" routerLink="/discs" [queryParams]="{ type: types.blu_ray }">Blu-Ray</a>
+        <a class="nav-child" routerLink="/discs" [queryParams]="{ type: types.dvd }">DVD</a>
+      </div>
+      <div class="nav-parent"><a routerLink="settings">Settings</a></div>
+    </div>
+  </mat-drawer>
+</mat-drawer-container>

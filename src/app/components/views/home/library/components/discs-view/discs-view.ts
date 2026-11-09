@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Album } from '../../../../../../shared/interfaces/Album';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AddAlbumModal } from '../../../../../../shared/components/add-album-modal/add-album-modal/add-album-modal';
 import { CommonModule } from '@angular/common';
@@ -12,49 +12,31 @@ import { IRelease } from 'musicbrainz-api';
   templateUrl: './discs-view.html',
   styleUrl: './discs-view.scss'
 })
-export class DiscsView {
+export class DiscsView implements OnInit {
   public discs: IRelease[] = [];
   public testAPI: string = 'test';
-  constructor(private http: HttpClient) {
-    const testAlbum: IRelease = {
-      id: '1',
-      title: 'Test',
-      country: '',
-      date: '',
-      collections: [],
-      media: [],
-      status: 'Official',
-      packaging: 'Book',
-      quality: 'normal',
-      relations: [],
-      'text-representation': {
-        language: '',
-        script: ''
-      },
-      disambiguation: '',
-      asin: null,
-      'status-id': '',
-      'cover-art-archive': {
-        count: 0,
-        front: false,
-        darkened: false,
-        artwork: false,
-        back: false
-      },
-      barcode: ''
-    }
+  public showAddModal: boolean = false;
+  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute) { }
 
-    this.discs.push(testAlbum);
-    this.discs.push(testAlbum);
-    this.discs.push(testAlbum);
-    this.discs.push(testAlbum);
-    this.discs.push(testAlbum);
-    this.discs.push(testAlbum);
-    this.discs.push(testAlbum);
-    this.discs.push(testAlbum);
+  ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe((params) => {
+      const type: string = params['type'];
+      this.http.get('http://localhost:3344/library', { params: { type: type }, headers: { 'Content-Type': 'application/json' } }).subscribe((data: any) => {
+        this.testAPI = data.msg.toString();
+        console.log(data);
+      });
+    });
   }
 
   public addAlbum() {
-    this.http.get('http://localhost:3344/library').subscribe((data: any) => this.testAPI = data.msg.toString());
+
+    this.showAddModal = true;
+  }
+
+  public albumAdded(album: Album) {
+    console.log(album);
+    this.http.post('http://localhost:3344/album', album).subscribe((res: any) => {
+      console.log(res);
+    })
   }
 }
