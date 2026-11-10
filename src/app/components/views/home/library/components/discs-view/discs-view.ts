@@ -3,12 +3,12 @@ import { Album } from '../../../../../../shared/interfaces/Album';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AddAlbumModal } from '../../../../../../shared/components/add-album-modal/add-album-modal/add-album-modal';
-import { CommonModule } from '@angular/common';
+
 import { IRelease } from 'musicbrainz-api';
 
 @Component({
   selector: 'app-discs-view',
-  imports: [RouterLink, CommonModule, AddAlbumModal],
+  imports: [RouterLink, AddAlbumModal],
   templateUrl: './discs-view.html',
   styleUrl: './discs-view.scss'
 })
