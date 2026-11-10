@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DiscType } from '../../../../shared/types/disc-type';
 
@@ -6,6 +6,7 @@ import { DiscType } from '../../../../shared/types/disc-type';
   selector: 'app-library',
   imports: [RouterLink],
   templateUrl: './library.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './library.scss'
 })
 export class Library {

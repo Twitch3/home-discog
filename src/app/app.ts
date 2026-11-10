@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { MatDrawerContainer, MatDrawer } from '@angular/material/sidenav';
 import { MatIcon } from '@angular/material/icon'
@@ -8,6 +8,7 @@ import { DiscType } from './shared/types/disc-type';
   selector: 'app-root',
   imports: [RouterOutlet, RouterLink, MatDrawerContainer, MatDrawer, MatIcon],
   templateUrl: './app.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './app.scss'
 })
 export class App {

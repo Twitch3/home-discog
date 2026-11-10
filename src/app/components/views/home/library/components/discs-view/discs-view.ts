@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Album } from '../../../../../../shared/interfaces/Album';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -10,6 +10,7 @@ import { IRelease } from 'musicbrainz-api';
   selector: 'app-discs-view',
   imports: [RouterLink, AddAlbumModal],
   templateUrl: './discs-view.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './discs-view.scss'
 })
 export class DiscsView implements OnInit {

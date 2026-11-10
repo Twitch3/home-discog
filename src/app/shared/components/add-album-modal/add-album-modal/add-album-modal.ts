@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, model } from '@angular/core';
+import { Component, Output, EventEmitter, model, ChangeDetectionStrategy } from '@angular/core';
 import { MusicbrainzApi } from '../../../services/musicbrainz-api/musicbrainz-api';
 import { IArtistCredit, IReleaseList } from 'musicbrainz-api';
 import { FormsModule } from '@angular/forms';
@@ -14,6 +14,7 @@ import { CountryNamePipe } from '../../../pipes/country-name.pipe';
   selector: 'app-add-album-modal',
   imports: [FormsModule, CommonModule, MatTableModule, MatInputModule, MatPaginatorModule, CountryNamePipe],
   templateUrl: './add-album-modal.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './add-album-modal.scss'
 })
 export class AddAlbumModal {
