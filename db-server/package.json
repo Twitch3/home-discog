@@ -14,9 +14,9 @@
   "dependencies": {
     "body-parser": "^2.2.1",
     "express": "^5.1.0",
-    "lowdb": "^7.0.1",
     "musicbrainz-api": "^0.25.1",
     "rxjs": "~7.8.0",
+    "sqlite3": "^6.0.1",
     "ts-node-dev": "^2.0.0",
     "tslib": "^2.3.0"
   },
